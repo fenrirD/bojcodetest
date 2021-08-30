@@ -29,27 +29,28 @@
  var fs = require('fs');
  var input = fs.readFileSync('/dev/stdin').toString().trim().split('\n'); // 개행문자로 입력을 구분한다.
  **/
-
+//  콘솔로그.. ㅇ시간?
 export
 const solution = (arr: string[]) => {
     const [cmdCnt, ...cmds] = arr
 
     const queue = []
+    const result = []
 
     const commend = {
         push: (value) => queue.push(value),
-        pop: () => console.log(queue.shift() || -1),
-        size: () => console.log(queue.length),
-        empty: () => console.log(queue.length ? 0 : 1),
-        front: () => console.log(queue[0] || -1),
-        back: () => console.log(queue[queue.length-1] || -1),
+        pop: () => result.push(queue.shift() || -1),
+        size: () => result.push(queue.length),
+        empty: () => result.push(queue.length ? 0 : 1),
+        front: () => result.push(queue[0] || -1),
+        back: () => result.push(queue[queue.length-1] || -1),
     }
     cmds.forEach(e => {
         const [cmd, value] = e.split(' ')
         // console.log(cmd,value)
         commend[cmd].call(this, value)
     })
-    console.log(queue)
+    console.log(result.join('\n'))
 }
 
 solution(
