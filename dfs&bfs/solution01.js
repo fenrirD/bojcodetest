@@ -40,6 +40,7 @@ const dfs = (selectNodeNum, nodes, visitNodes) => {
         if(!visitNodes.includes(nextNode)) dfs(nextNode, nodes, visitNodes)
     }
 }
+
 // bfs 는 너비우선탐색으로 1의 모든 노드를 방문 후 , 그 다음 노드를 방문한다 .
 const bfs = (selectNodeNum, nodes, visitNodes) => {
     let queue = []
