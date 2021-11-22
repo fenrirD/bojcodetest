@@ -27,45 +27,42 @@
 
 
 const solution = (args) => {
-  const startTime = new Date().getTime()
+  // const startTime = new Date().getTime()
 
   const [n, k] = args.map((n) => parseInt(n))
-  console.log(n, k)
-
+  // console.log(n, k)
+  const obj = Array.from(new Array(100000), x=>[])
   const bfs = (nowP, lastP, len) => {
+    // 2차원배열 선언
     const visit = new Array(100000)
     visit[nowP] = 1
     let queue = [nowP]
-    const obj = {}
+
     while (queue.length) {
       let size = queue.length
       if (len < 5) console.log(queue)
       for (let i = 0; i < size; i++) {
         const node = queue.shift()
         visit[node] = 1
-        obj[node] = []
+        if(visit[lastP]) break
         if (!visit[node - 1] && node - 1 >= 0) {
           queue.push(node - 1)
-          obj[node].push(node - 1)
-          // obj[node - 1] = obj[node - 1] ? obj[node - 1].concat(node) : [node]
+          obj[node - 1].push( node )
         }
-
         if (!visit[node + 1] && node + 1 <= 100000) {
           queue.push(node + 1)
-          obj[node].push(node + 1)
-          // obj[node + 1] = obj[node + 1] ? obj[node - 1].concat(node) : [node]
+          obj[node + 1].push(node)
         }
         if (!visit[node * 2] && node * 2 <= 100000) {
           queue.push(node * 2)
-          obj[node].push(node * 2)
-          // obj[node * 2] = obj[node * 2] ? obj[node * 2].concat(node) : [node]
+          obj[node * 2].push(node)
         }
 
       }
       queue = [...new Set(queue)]
       // console.log(obj , visit[lastP])
       if (visit[lastP] === 1) {
-        console.log(obj)
+        // console.log(obj)
         return len
       }
       len++
@@ -75,10 +72,31 @@ const solution = (args) => {
 
 
   const result = bfs(n, k, 0)
-  console.log(result)
-  const endTime = new Date().getTime()
-  console.log("Time:", (endTime - startTime) / 1000)
-  return result
+  const ret = []
+  // const dfs = (node) =>{
+  //   // ret.push(node)
+  //   // if(obj[node].length){
+  //   //   dfs(obj[node][0])
+  //   // }
+  //   return obj[node].length ? dfs(obj[node][0]) : node
+  // }
+  //
+  // dfs(k)
+  // let startNode = k
+  ret.push(k)
+  for (let i = result; i > 0; i--) {
+    let node = obj[ret[ret.length - 1]][0]
+    ret.push(node)
+  }
+
+  console.log(`${result}\n${ret.reverse().join(' ')}`)
+
+  // console.log('ottoK:',ret.reverse())
+
+
+  // const endTime = new Date().getTime()
+  // console.log("Time:", (endTime - startTime) / 1000)
+  // return result
 
 }
 
