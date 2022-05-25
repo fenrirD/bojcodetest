@@ -129,7 +129,29 @@ const solution3 = (n) => {
   // console.log(arr)
   return an
 }
+
+
+const solution4 = (n) => {
+ let cnt = 0
+  while (n!==0) {
+   if(n%2 !==0) {
+     n = (n-1) / 2
+     cnt++
+   } else {
+     n /=2
+   }
+  }
+  console.log(cnt)
+  // console.log(arr)
+}
 // console.log(solution3(1)) //2
-// console.log(solution3( 1000000000)) //2
-console.log(solution3(6)) //2 => 1f 2t 3f 6t
-// console.log(solution3(50000000)) //5
+console.log(solution4( 1000000000)) //2
+console.log(solution4(6)) //2 => 1f 2t 3f 6t
+console.log(solution4(50000000)) //5
+//6 => 110
+//
+
+const solution5 = (n) => {
+  return [...(n).toString(2)].filter(a=>a==='1').length
+}
+console.log(solution4( 1000000000)) //2
